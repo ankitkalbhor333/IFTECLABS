@@ -20,7 +20,7 @@ export default function Contact() {
       icon: faLocationDot,
       title: 'Address',
       value: 'A-163 Indra Vihar, Airport Road, Bhopal, M.P. – 462030',
-      link: 'https://maps.google.com/?q=A-163+Indra+Vihar+Airport+Road+Bhopal'
+      link: 'https://www.google.com/maps/place/IF-TECH+EMBEDDED+SYSTEMS/@23.2786731,77.3609952,201m/data=!3m1!1e3!4m6!3m5!1s0x397c67c154ef4591:0xcceaeed61f6441e3!8m2!3d23.2783754!4d77.3609269!16s%2Fg%2F11b8r6nbtc!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgxMi4wIKXMDSoASAFQAw%3D%3D'
     }
   ]
 
@@ -120,17 +120,25 @@ export default function Contact() {
             {/* Right - Map & Message */}
             <div className="contact-right">
               {/* Map */}
-              <div className="map-container">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3669.2543968419297!2d77.34651287459154!3d23.158946211256923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sA-163%20Indra%20Vihar%2C%20Airport%20Road%2C%20Bhopal!5e0!3m2!1sen!2sin!4v1699526826000"
-                  width="100%"
-                  height="400"
-                  style={{ border: 0, borderRadius: '10px' }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
+              <a
+                href="https://www.google.com/maps/place/IF-TECH+EMBEDDED+SYSTEMS/@23.2786731,77.3609952,201m/data=!3m1!1e3!4m6!3m5!1s0x397c67c154ef4591:0xcceaeed61f6441e3!8m2!3d23.2783754!4d77.3609269!16s%2Fg%2F11b8r6nbtc!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgxMi4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="map-link-wrapper"
+                style={{ display: 'block', textDecoration: 'none' }}
+              >
+                <div className="map-container">
+                  <iframe
+                    src="https://maps.google.com/maps?q=IF-TECH%20EMBEDDED%20SYSTEMS%20Bhopal&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="400"
+                    style={{ border: 0, borderRadius: '10px', pointerEvents: 'none' }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </a>
 
               {/* Simple Message */}
               <div className="info-box">

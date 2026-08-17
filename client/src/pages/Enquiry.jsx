@@ -254,7 +254,6 @@ export default function Enquiry() {
       }
     } catch (error) {
       console.error('Error submitting enquiry:', error)
-
       setSubmitError(
         error.response?.data?.message ||
         'Failed to submit enquiry. Please try again.'
@@ -264,68 +263,51 @@ export default function Enquiry() {
     }
   }
 
-  /* =========================
-     SUCCESS SCREEN
-  ========================== */
+  // Helper validation states for progress tracking
+  const stepOneValid = formData.name && formData.email && formData.phone && !errors.name && !errors.email && !errors.phone;
+  const stepTwoValid = formData.enquiryType && formData.service;
+  const stepThreeValid = formData.message.trim().length >= 10 && !errors.message;
 
   if (submitted) {
     return (
       <div className="enquiry">
-
         <section className="enquiry-success-hero">
           <div className="enquiry-container">
-            <span className="enquiry-eyebrow">
-              ENQUIRY RECEIVED
-            </span>
-
+            <span className="enquiry-eyebrow">ENQUIRY RECEIVED</span>
             <h1>Thank You for Reaching Out</h1>
-
-            <p>
-              Your project enquiry has been successfully submitted.
-            </p>
+            <p>Your project enquiry has been successfully submitted.</p>
           </div>
         </section>
 
         <section className="enquiry-success-section">
           <div className="enquiry-container">
-
             <div className="success-card">
-
               <div className="success-icon">
                 <FontAwesomeIcon icon={faCheckCircle} />
               </div>
-
               <h2>Enquiry Submitted Successfully</h2>
-
               <p className="success-description">
-                Thank you for contacting IFTECLABS. Our team has received
-                your requirements and will review them shortly.
+                Thank you for contacting IFTECLABS. Our team has received your requirements and will review them shortly.
               </p>
 
               <div className="success-details">
-
                 <div className="success-detail">
                   <span>Enquiry ID</span>
-                  <strong>#{enquiryId}</strong>
+                  <strong><code>#{enquiryId}</code></strong>
                 </div>
-
                 <div className="success-detail">
                   <span>Service</span>
                   <strong>{formData.service}</strong>
                 </div>
-
                 <div className="success-detail">
                   <span>Contact Email</span>
                   <strong>{formData.email}</strong>
                 </div>
-
               </div>
 
               <div className="next-steps">
-
                 <div className="next-steps-header">
                   <FontAwesomeIcon icon={faInfoCircle} />
-
                   <div>
                     <h3>What happens next?</h3>
                     <p>Our usual process after receiving your enquiry.</p>
@@ -333,158 +315,117 @@ export default function Enquiry() {
                 </div>
 
                 <div className="steps-list">
-
                   <div className="step-item">
                     <span>01</span>
                     <div>
                       <strong>Requirement Review</strong>
-                      <p>
-                        Our team reviews your project requirements.
-                      </p>
+                      <p>Our team reviews your project requirements.</p>
                     </div>
                   </div>
-
                   <div className="step-item">
                     <span>02</span>
                     <div>
                       <strong>Team Contact</strong>
-                      <p>
-                        We contact you within 24–48 business hours.
-                      </p>
+                      <p>We contact you within 24–48 business hours.</p>
                     </div>
                   </div>
-
                   <div className="step-item">
                     <span>03</span>
                     <div>
                       <strong>Project Discussion</strong>
-                      <p>
-                        We discuss your requirements and possible solutions.
-                      </p>
+                      <p>We discuss your requirements and possible solutions.</p>
                     </div>
                   </div>
-
                 </div>
-
               </div>
 
               <div className="confirmation-message">
                 <FontAwesomeIcon icon={faEnvelope} />
-
                 <span>
-                  Confirmation details have been sent to{' '}
-                  <strong>{formData.email}</strong>
+                  Confirmation details have been sent to <strong>{formData.email}</strong>
                 </span>
               </div>
 
               <button
-                onClick={() => {
-                  window.location.href = '/'
-                }}
-                className="enquiry-btn enquiry-btn-primary"
+                onClick={() => { window.location.href = '/' }}
+                className="btn btn-primary success-card-btn"
               >
                 Back to Home
                 <FontAwesomeIcon icon={faArrowRight} />
               </button>
-
             </div>
-
           </div>
         </section>
-
       </div>
     )
   }
 
-  /* =========================
-     MAIN ENQUIRY PAGE
-  ========================== */
-
   return (
     <div className="enquiry">
-
       {/* HERO */}
-
       <section className="enquiry-hero">
-
-        <div className="enquiry-hero-grid"></div>
-
         <div className="enquiry-container enquiry-hero-content">
-
-          <span className="enquiry-eyebrow">
-            PROJECT ENQUIRY
-          </span>
-
+          <span className="enquiry-eyebrow">PROJECT ENQUIRY</span>
           <h1>
             Let's Build Something
             <span> Great Together.</span>
           </h1>
-
           <p>
-            Tell us about your project, and our engineering team
-            will get back to you with the right solution.
+            Tell us about your project, and our engineering team will get back to you with the right solution.
           </p>
-
           <div className="hero-trust">
-
             <div>
               <FontAwesomeIcon icon={faCheckCircle} />
               Engineering-focused solutions
             </div>
-
             <div>
               <FontAwesomeIcon icon={faCheckCircle} />
               Fast response
             </div>
-
             <div>
               <FontAwesomeIcon icon={faCheckCircle} />
               Custom solutions
             </div>
-
           </div>
-
         </div>
-
       </section>
 
-
-      {/* MAIN */}
-
+      {/* MAIN CONTENT */}
       <section className="enquiry-section">
-
         <div className="enquiry-container">
-
           <div className="enquiry-layout">
-
-            {/* FORM */}
-
+            
+            {/* FORM CONTAINER */}
             <div className="enquiry-form-container">
-
               <div className="form-header">
-
-                <span className="section-number">
-                  01
-                </span>
-
+                <span className="section-number">01</span>
                 <div>
                   <h2>Tell Us About Your Project</h2>
-
                   <p>
-                    Share a few details about your requirements.
-                    Our team will review your enquiry and contact you.
+                    Share a few details about your requirements. Our team will review your enquiry and contact you.
                   </p>
                 </div>
-
               </div>
 
+              {/* Progressive Steps Indicator */}
+              <div className="form-progress-bar">
+                <div className={`progress-step-indicator ${stepOneValid ? 'completed' : 'active'}`}>
+                  <span className="step-dot">{stepOneValid ? '✓' : '1'}</span>
+                  <span className="step-label">Contact</span>
+                </div>
+                <div className="progress-line"></div>
+                <div className={`progress-step-indicator ${stepTwoValid ? 'completed' : stepOneValid ? 'active' : ''}`}>
+                  <span className="step-dot">{stepTwoValid ? '✓' : '2'}</span>
+                  <span className="step-label">Requirements</span>
+                </div>
+                <div className="progress-line"></div>
+                <div className={`progress-step-indicator ${stepThreeValid ? 'completed' : stepTwoValid ? 'active' : ''}`}>
+                  <span className="step-dot">{stepThreeValid ? '✓' : '3'}</span>
+                  <span className="step-label">Details</span>
+                </div>
+              </div>
 
-              <form
-                onSubmit={handleSubmit}
-                className="enquiry-form"
-                noValidate
-              >
-
+              <form onSubmit={handleSubmit} className="enquiry-form" noValidate>
                 {submitError && (
                   <div className="form-alert">
                     <FontAwesomeIcon icon={faExclamationCircle} />
@@ -492,36 +433,25 @@ export default function Enquiry() {
                   </div>
                 )}
 
-
-                {/* CONTACT */}
-
+                {/* SECTION 1: CONTACT */}
                 <div className="form-section">
-
                   <div className="form-section-title">
-
                     <span>01</span>
-
                     <div>
                       <h3>Contact Information</h3>
                       <p>How can we reach you?</p>
                     </div>
-
                   </div>
 
-
                   <div className="form-row">
-
-                    {/* NAME */}
-
                     <div className="form-group">
-
                       <label>
-                        Full Name
-                        <span className="required">*</span>
+                        Full Name <span className="required">*</span>
+                        {formData.name && !errors.name && (
+                          <FontAwesomeIcon icon={faCheckCircle} className="label-valid-icon" />
+                        )}
                       </label>
-
                       <div className="input-wrapper">
-
                         <input
                           type="text"
                           name="name"
@@ -532,40 +462,22 @@ export default function Enquiry() {
                           className={errors.name ? 'input-error' : ''}
                           maxLength={100}
                         />
-
                         {formData.name && (
-                          <span className="char-count">
-                            {formData.name.length}/100
-                          </span>
+                          <span className="char-count">{formData.name.length}/100</span>
                         )}
-
                       </div>
-
-                      {errors.name && (
-                        <span className="error-msg">
-                          {errors.name}
-                        </span>
-                      )}
-
+                      {errors.name && <span className="error-msg">{errors.name}</span>}
                     </div>
 
-
-                    {/* EMAIL */}
-
                     <div className="form-group">
-
                       <label>
-                        Email Address
-                        <span className="required">*</span>
+                        Email Address <span className="required">*</span>
+                        {formData.email && !errors.email && (
+                          <FontAwesomeIcon icon={faCheckCircle} className="label-valid-icon" />
+                        )}
                       </label>
-
                       <div className="input-wrapper has-icon">
-
-                        <FontAwesomeIcon
-                          icon={faEnvelope}
-                          className="input-icon"
-                        />
-
+                        <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
                         <input
                           type="email"
                           name="email"
@@ -575,38 +487,21 @@ export default function Enquiry() {
                           placeholder="your.email@example.com"
                           className={errors.email ? 'input-error' : ''}
                         />
-
                       </div>
-
-                      {errors.email && (
-                        <span className="error-msg">
-                          {errors.email}
-                        </span>
-                      )}
-
+                      {errors.email && <span className="error-msg">{errors.email}</span>}
                     </div>
-
                   </div>
 
-
                   <div className="form-row">
-
-                    {/* PHONE */}
-
                     <div className="form-group">
-
                       <label>
-                        Phone Number
-                        <span className="required">*</span>
+                        Phone Number <span className="required">*</span>
+                        {formData.phone && !errors.phone && (
+                          <FontAwesomeIcon icon={faCheckCircle} className="label-valid-icon" />
+                        )}
                       </label>
-
                       <div className="input-wrapper has-icon">
-
-                        <FontAwesomeIcon
-                          icon={faPhone}
-                          className="input-icon"
-                        />
-
+                        <FontAwesomeIcon icon={faPhone} className="input-icon" />
                         <input
                           type="tel"
                           name="phone"
@@ -617,78 +512,49 @@ export default function Enquiry() {
                           className={errors.phone ? 'input-error' : ''}
                           maxLength={20}
                         />
-
                       </div>
-
-                      {errors.phone && (
-                        <span className="error-msg">
-                          {errors.phone}
-                        </span>
-                      )}
-
+                      {errors.phone && <span className="error-msg">{errors.phone}</span>}
                     </div>
-
-
-                    {/* ORGANIZATION */}
 
                     <div className="form-group">
-
                       <label>
-                        Organization / College
-                        <span className="optional">
-                          Optional
-                        </span>
+                        Organization / College <span className="optional">Optional</span>
                       </label>
-
-                      <input
-                        type="text"
-                        name="organization"
-                        value={formData.organization}
-                        onChange={handleChange}
-                        placeholder="ABC College / XYZ Company"
-                        maxLength={100}
-                      />
-
-                      {formData.organization && (
-                        <span className="char-count">
-                          {formData.organization.length}/100
-                        </span>
-                      )}
-
+                      <div className="input-wrapper">
+                        <input
+                          type="text"
+                          name="organization"
+                          value={formData.organization}
+                          onChange={handleChange}
+                          placeholder="ABC College / XYZ Company"
+                          maxLength={100}
+                        />
+                        {formData.organization && (
+                          <span className="char-count">{formData.organization.length}/100</span>
+                        )}
+                      </div>
                     </div>
-
                   </div>
-
                 </div>
 
-
-                {/* PROJECT */}
-
+                {/* SECTION 2: REQUIREMENTS */}
                 <div className="form-section">
-
                   <div className="form-section-title">
-
                     <span>02</span>
-
                     <div>
                       <h3>Project Requirements</h3>
                       <p>Tell us what you need help with.</p>
                     </div>
-
                   </div>
 
-
                   <div className="form-row">
-
-                    {/* ENQUIRY TYPE */}
-
                     <div className="form-group">
-
                       <label>
-                        Enquiry Type
-                        <span className="required">*</span>
+                        Enquiry Type <span className="required">*</span>
+                        {formData.enquiryType && (
+                          <FontAwesomeIcon icon={faCheckCircle} className="label-valid-icon" />
+                        )}
                       </label>
-
                       <select
                         name="enquiryType"
                         value={formData.enquiryType}
@@ -696,40 +562,21 @@ export default function Enquiry() {
                         onBlur={handleBlur}
                         className={errors.enquiryType ? 'input-error' : ''}
                       >
-
-                        <option value="">
-                          Select enquiry type
-                        </option>
-
+                        <option value="">Select enquiry type</option>
                         {enquiryTypes.map(type => (
-                          <option
-                            key={type}
-                            value={type}
-                          >
-                            {type}
-                          </option>
+                          <option key={type} value={type}>{type}</option>
                         ))}
-
                       </select>
-
-                      {errors.enquiryType && (
-                        <span className="error-msg">
-                          {errors.enquiryType}
-                        </span>
-                      )}
-
+                      {errors.enquiryType && <span className="error-msg">{errors.enquiryType}</span>}
                     </div>
 
-
-                    {/* SERVICE */}
-
                     <div className="form-group">
-
                       <label>
-                        Service Required
-                        <span className="required">*</span>
+                        Service Required <span className="required">*</span>
+                        {formData.service && (
+                          <FontAwesomeIcon icon={faCheckCircle} className="label-valid-icon" />
+                        )}
                       </label>
-
                       <select
                         name="service"
                         value={formData.service}
@@ -737,150 +584,115 @@ export default function Enquiry() {
                         onBlur={handleBlur}
                         className={errors.service ? 'input-error' : ''}
                       >
-
-                        <option value="">
-                          Select service
-                        </option>
-
+                        <option value="">Select service</option>
                         {services.map(service => (
-                          <option
-                            key={service}
-                            value={service}
-                          >
-                            {service}
-                          </option>
+                          <option key={service} value={service}>{service}</option>
                         ))}
-
                       </select>
-
-                      {errors.service && (
-                        <span className="error-msg">
-                          {errors.service}
-                        </span>
-                      )}
-
+                      {errors.service && <span className="error-msg">{errors.service}</span>}
                     </div>
-
                   </div>
 
-
-                  {/* BUDGET */}
-
+                  {/* Dynamic Budget Cards */}
                   <div className="form-group">
-
                     <label>
-                      Project Budget
-                      <span className="optional">
-                        Optional
-                      </span>
+                      Project Budget <span className="optional">Optional</span>
                     </label>
-
-                    <select
-                      name="budget"
-                      value={formData.budget}
-                      onChange={handleChange}
-                    >
-
-                      <option value="">
-                        Select budget range
-                      </option>
-
+                    <div className="budget-grid-cards">
                       {budgetRanges.map(range => (
-                        <option
+                        <button
+                          type="button"
                           key={range}
-                          value={range}
+                          className={`budget-card-btn ${formData.budget === range ? 'selected' : ''}`}
+                          onClick={() => {
+                            setFormData(prev => ({ ...prev, budget: range }));
+                          }}
                         >
                           {range}
-                        </option>
+                        </button>
                       ))}
-
-                    </select>
-
+                    </div>
                   </div>
-
                 </div>
 
-
-                {/* COMMUNICATION */}
-
+                {/* SECTION 3: COMMUNICATION */}
                 <div className="form-section">
-
                   <div className="form-section-title">
-
                     <span>03</span>
-
                     <div>
                       <h3>Communication Preference</h3>
                       <p>How would you prefer us to contact you?</p>
                     </div>
-
                   </div>
 
-
                   <div className="contact-methods">
-
                     {contactMethods.map(method => (
-
                       <label
                         key={method}
-                        className={`contact-method ${
-                          formData.preferredContact === method
-                            ? 'selected'
-                            : ''
-                        }`}
+                        className={`contact-method ${formData.preferredContact === method ? 'selected' : ''}`}
                       >
-
                         <input
                           type="radio"
                           name="preferredContact"
                           value={method}
-                          checked={
-                            formData.preferredContact === method
-                          }
+                          checked={formData.preferredContact === method}
                           onChange={handleChange}
                         />
-
                         <span className="custom-radio"></span>
-
                         <span>{method}</span>
-
                       </label>
-
                     ))}
-
                   </div>
-
                 </div>
 
-
-                {/* MESSAGE */}
-
+                {/* SECTION 4: DETAILS */}
                 <div className="form-section">
-
                   <div className="form-section-title">
-
                     <span>04</span>
-
                     <div>
                       <h3>Project Details</h3>
-                      <p>
-                        Tell us about your requirements,
-                        timeline and technical needs.
-                      </p>
+                      <p>Tell us about your requirements, timeline and technical needs.</p>
                     </div>
-
                   </div>
 
-
                   <div className="form-group">
-
                     <label>
-                      Project Details / Message
-                      <span className="required">*</span>
+                      Project Details / Message <span className="required">*</span>
+                      {formData.message.trim().length >= 10 && !errors.message && (
+                        <FontAwesomeIcon icon={faCheckCircle} className="label-valid-icon" />
+                      )}
                     </label>
 
-                    <div className="textarea-wrapper">
+                    {/* UX Quick Tag Chips */}
+                    <div className="quick-tags-container">
+                      <span className="quick-tags-label">Quick chips to describe your needs:</span>
+                      <div className="quick-tags">
+                        {[
+                          'Need custom prototype development',
+                          'Timeline is urgent (under 1 month)',
+                          'Requires both hardware & software',
+                          'IoT cloud integration needed',
+                          'Industrial grade components required'
+                        ].map((tag) => (
+                          <button
+                            type="button"
+                            key={tag}
+                            className="quick-tag-chip"
+                            onClick={() => {
+                              const currentMessage = formData.message.trim();
+                              const separator = currentMessage ? '\n- ' : '- ';
+                              const newMessage = currentMessage + separator + tag;
+                              setFormData(prev => ({ ...prev, message: newMessage }));
+                              validateField('message', newMessage);
+                            }}
+                          >
+                            + {tag.replace('Need ', '').replace('Requires ', '')}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
 
+                    <div className="textarea-wrapper">
                       <textarea
                         name="message"
                         value={formData.message}
@@ -891,34 +703,19 @@ export default function Enquiry() {
                         rows="7"
                         maxLength={5000}
                       />
-
-                      <span className="char-count">
-                        {formData.message.length}/5000
-                      </span>
-
+                      <span className="char-count">{formData.message.length}/5000</span>
                     </div>
-
-                    {errors.message && (
-                      <span className="error-msg">
-                        {errors.message}
-                      </span>
-                    )}
-
+                    {errors.message && <span className="error-msg">{errors.message}</span>}
                   </div>
-
                 </div>
 
-
-                {/* SUBMIT */}
-
+                {/* SUBMIT ACTIONS */}
                 <div className="submit-area">
-
                   <button
                     type="submit"
-                    className="enquiry-btn enquiry-btn-submit"
+                    className="btn btn-primary enquiry-btn-submit"
                     disabled={loading}
                   >
-
                     {loading ? (
                       <>
                         <span className="button-spinner"></span>
@@ -930,202 +727,106 @@ export default function Enquiry() {
                         <FontAwesomeIcon icon={faPaperPlane} />
                       </>
                     )}
-
                   </button>
-
                   <p className="form-disclaimer">
                     <span>*</span> Required fields
                     <span className="divider"></span>
                     Your information is used only to respond to your enquiry.
                   </p>
-
                 </div>
-
               </form>
-
             </div>
 
-
             {/* SIDEBAR */}
-
             <aside className="enquiry-info">
-
-              {/* WHY */}
-
+              {/* WHY CARD */}
               <div className="info-card">
-
                 <div className="info-card-header">
                   <span className="info-icon">
                     <FontAwesomeIcon icon={faCheckCircle} />
                   </span>
-
                   <div>
                     <h3>Why Work With Us?</h3>
                     <p>Built around your requirements.</p>
                   </div>
                 </div>
-
                 <ul>
-
-                  <li>
-                    <span>✓</span>
-                    Engineering-focused solutions
-                  </li>
-
-                  <li>
-                    <span>✓</span>
-                    Custom project development
-                  </li>
-
-                  <li>
-                    <span>✓</span>
-                    Experienced technical team
-                  </li>
-
-                  <li>
-                    <span>✓</span>
-                    Transparent communication
-                  </li>
-
-                  <li>
-                    <span>✓</span>
-                    Reliable project delivery
-                  </li>
-
+                  <li><span>✓</span> Engineering-focused solutions</li>
+                  <li><span>✓</span> Custom project development</li>
+                  <li><span>✓</span> Experienced technical team</li>
+                  <li><span>✓</span> Transparent communication</li>
+                  <li><span>✓</span> Reliable project delivery</li>
                 </ul>
-
               </div>
 
-
-              {/* RESPONSE */}
-
+              {/* RESPONSE CARD */}
               <div className="info-card response-card">
-
                 <div className="response-icon">
                   <FontAwesomeIcon icon={faClock} />
                 </div>
-
                 <div>
-
-                  <span className="small-label">
-                    QUICK RESPONSE
-                  </span>
-
-                  <h3>
-                    24–48 Hours
-                  </h3>
-
-                  <p>
-                    Most enquiries receive a response
-                    within 24–48 business hours.
-                  </p>
-
+                  <span className="small-label">QUICK RESPONSE</span>
+                  <h3>24–48 Hours</h3>
+                  <p>Most enquiries receive a response within 24–48 business hours.</p>
                 </div>
-
               </div>
 
-
-              {/* CONTACT */}
-
+              {/* CONTACT CARD */}
               <div className="info-card">
-
                 <div className="info-card-header">
-
                   <span className="info-icon">
                     <FontAwesomeIcon icon={faPhone} />
                   </span>
-
                   <div>
                     <h3>Prefer Direct Contact?</h3>
                     <p>We're happy to talk.</p>
                   </div>
-
                 </div>
-
-
                 <div className="direct-contact">
-
-                  <a
-                    href="tel:+919826588782"
-                    className="direct-contact-item"
-                  >
-
+                  <a href="tel:+919826588782" className="direct-contact-item">
                     <span className="contact-icon">
                       <FontAwesomeIcon icon={faPhone} />
                     </span>
-
                     <div>
                       <span>Phone</span>
                       <strong>+91 98265 88782</strong>
                     </div>
-
                   </a>
-
-
-                  <a
-                    href="mailto:iftechsystems@gmail.com"
-                    className="direct-contact-item"
-                  >
-
+                  <a href="mailto:iftechsystems@gmail.com" className="direct-contact-item">
                     <span className="contact-icon">
                       <FontAwesomeIcon icon={faEnvelope} />
                     </span>
-
                     <div>
                       <span>Email</span>
                       <strong>iftechsystems@gmail.com</strong>
                     </div>
-
                   </a>
-
                 </div>
-
               </div>
 
-
-              {/* LOCATION */}
-
+              {/* LOCATION NOTE */}
               <div className="location-note">
-
                 <FontAwesomeIcon icon={faLocationDot} />
-
-                <span>
-                  Serving businesses, institutions
-                  and technology projects.
-                </span>
-
+                <span>Serving businesses, institutions and technology projects.</span>
               </div>
-
             </aside>
 
           </div>
 
-
           {/* TRUST STRIP */}
-
           <div className="trust-strip">
-
-            <span className="trust-title">
-              FROM CONCEPT TO IMPLEMENTATION
-            </span>
-
+            <span className="trust-title">FROM CONCEPT TO IMPLEMENTATION</span>
             <div className="trust-items">
-
               <span>Electronics</span>
               <span>Automation</span>
               <span>IoT & Embedded</span>
               <span>Robotics</span>
               <span>PCB Design</span>
               <span>Training</span>
-
             </div>
-
           </div>
-
         </div>
-
       </section>
-
     </div>
   )
 }

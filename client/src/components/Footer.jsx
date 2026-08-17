@@ -37,6 +37,7 @@ export default function Footer() {
     'Robotics',
     'PCB Design & Fabrication',
     'Training & Consultancy',
+    'Connect Bluetooth Service',
   ]
 
   return (
@@ -53,6 +54,17 @@ export default function Footer() {
             Engineering innovative solutions in electronics,
             automation, IoT and robotics.
           </p>
+
+          <div style={{ marginTop: '12px' }}>
+            <a 
+              href="https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal"
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ fontSize: '0.82rem', color: 'var(--accent-light)', fontWeight: '600', textDecoration: 'underline' }}
+            >
+              📥 Serial Bluetooth Terminal App
+            </a>
+          </div>
 
           {/* Social Links */}
           <div className="social-links">
@@ -168,29 +180,40 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="footer-bottom">
+        <div className="footer-bottom-container">
+          <p>
+            &copy; {currentYear} IFTECLABS ORG. All Rights Reserved.
+          </p>
 
-        <p>
-          &copy; {currentYear} IFTECLABS ORG. All Rights Reserved.
-        </p>
+          <div className="footer-bottom-links">
 
-        <div className="footer-bottom-links">
+            <a
+              href="https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Bluetooth Terminal App
+            </a>
 
-          <Link to="/privacy">
-            Privacy Policy
-          </Link>
+            <span>•</span>
 
-          <span>•</span>
+            <Link to="/privacy">
+              Privacy Policy
+            </Link>
 
-          <Link to="/terms">
-            Terms &amp; Conditions
-          </Link>
+            <span>•</span>
 
-          <span>•</span>
+            <Link to="/terms">
+              Terms &amp; Conditions
+            </Link>
 
-          <Link to="/disclaimer">
-            Disclaimer
-          </Link>
+            <span>•</span>
 
+            <Link to="/disclaimer">
+              Disclaimer
+            </Link>
+
+          </div>
         </div>
       </div>
     </footer>

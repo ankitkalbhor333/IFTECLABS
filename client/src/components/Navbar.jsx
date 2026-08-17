@@ -20,7 +20,7 @@ export default function Navbar() {
       <div className="navbar-container">
         {/* Logo */}
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
-          IFTECLABS
+          <img src="/logo.png" alt="IFTECLABS Logo" className="navbar-logo-img" />
         </Link>
 
         {/* Hamburger Menu Icon */}

@@ -9,18 +9,21 @@ export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('all')
 
   const images = [
-    { id: 1, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'electronics', title: 'Electronics Assembly' },
-    { id: 2, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'robotics', title: 'Robotic Systems' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'automation', title: 'Automation System' },
-    { id: 4, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'pcb', title: 'PCB Design' },
-    { id: 5, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'workshop', title: 'Workshop Setup' },
-    { id: 6, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'training', title: 'Training Session' },
-    { id: 7, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'electronics', title: 'Component Testing' },
-    { id: 8, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'robotics', title: 'Robot Testing' },
-    { id: 9, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'iot', title: 'IoT Devices' },
-    { id: 10, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'events', title: 'Company Event' },
-    { id: 11, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'workshop', title: 'Workshop - Day 2' },
-    { id: 12, src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=600&fit=crop', category: 'projects', title: 'Final Project Demo' }
+    { id: 1, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786971881/photo1_cblcxl.jpg', category: 'projects', title: 'pen plotter' },
+    { id: 2, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786972389/iotoutomation_lzvwwv.jpg', category: 'projects', title: 'traffic light ' },
+    { id: 3, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786972981/circuittesting_fzgy9z.jpg', category: 'projects', title: 'microwave oven testing' },
+    { id: 4, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786973697/pcbdesign1_tczvqf.jpg', category: 'pcb', title: 'PCB Design by ifteclabs' },
+    { id: 5, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786973822/pcbdesign3_utly6y.jpg', category: 'pcb', title: 'PCB Design by ifteclabs' },
+    { id: 6, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786973707/pcbdesign2_nruylp.jpg', category: 'pcb', title: 'PCB Design by ifteclabs' },
+    { id: 7, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786974549/project_vnfxdl.jpg', category: 'projects', title: 'irrigation system' },
+    { id: 8, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786974683/workshop1_sludyi.jpg', category: 'workshop', title: 'WORKSHOP' },
+    { id: 9, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786974821/bootloader_vjuzc8.jpg', category: 'electronics', title: 'Bootloader' },
+    { id: 10, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786974923/workshop2_e7aklg.jpg', category: 'workshop', title: 'WORKSHOP' },
+    { id: 11, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786975179/robotic_tuld02.jpg', category: 'robotics', title: 'ROBOTIC ' },
+    { id: 12, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786972140/photo2_j1kudb.jpg', category: 'projects', title: 'pen plotter' },
+      { id: 13, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786975210/screenprinted_pcb_vx57rn.jpg', category: 'pcb', title: 'screen printer' },
+      { id: 14, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786975464/microwave1_kzokrb.jpg', category: 'electronics', title: 'microwave ' },
+      { id: 15, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786972389/iotoutomation_lzvwwv.jpg', category: 'projects', title: 'microwave ' }
   ]
 
   const categories = [
@@ -40,9 +43,13 @@ export default function Gallery() {
     ? images
     : images.filter(img => img.category === selectedCategory)
 
-  const openLightbox = (image, index) => {
+  const openLightbox = (image) => {
     setSelectedImage(image)
-    setCurrentImageIndex(index)
+    const sameTitleImages = images.filter(img => 
+      img.title.trim().toLowerCase() === image.title.trim().toLowerCase()
+    )
+    const index = sameTitleImages.findIndex(img => img.id === image.id)
+    setCurrentImageIndex(index !== -1 ? index : 0)
   }
 
   const closeLightbox = () => {
@@ -50,15 +57,23 @@ export default function Gallery() {
   }
 
   const nextImage = () => {
-    const newIndex = (currentImageIndex + 1) % filteredImages.length
+    const sameTitleImages = images.filter(img => 
+      img.title.trim().toLowerCase() === selectedImage.title.trim().toLowerCase()
+    )
+    if (sameTitleImages.length === 0) return
+    const newIndex = (currentImageIndex + 1) % sameTitleImages.length
     setCurrentImageIndex(newIndex)
-    setSelectedImage(filteredImages[newIndex])
+    setSelectedImage(sameTitleImages[newIndex])
   }
 
   const prevImage = () => {
-    const newIndex = (currentImageIndex - 1 + filteredImages.length) % filteredImages.length
+    const sameTitleImages = images.filter(img => 
+      img.title.trim().toLowerCase() === selectedImage.title.trim().toLowerCase()
+    )
+    if (sameTitleImages.length === 0) return
+    const newIndex = (currentImageIndex - 1 + sameTitleImages.length) % sameTitleImages.length
     setCurrentImageIndex(newIndex)
-    setSelectedImage(filteredImages[newIndex])
+    setSelectedImage(sameTitleImages[newIndex])
   }
 
   return (
@@ -96,11 +111,11 @@ export default function Gallery() {
       <section className="gallery-grid-section">
         <div className="container">
           <div className="gallery-grid">
-            {filteredImages.map((image, index) => (
+            {filteredImages.map((image) => (
               <div
                 key={image.id}
                 className="gallery-item"
-                onClick={() => openLightbox(image, index)}
+                onClick={() => openLightbox(image)}
               >
                 <img src={image.src} alt={image.title} />
                 <div className="gallery-overlay">
@@ -136,7 +151,11 @@ export default function Gallery() {
             </button>
 
             <div className="lightbox-counter">
-              {currentImageIndex + 1} / {filteredImages.length}
+              {currentImageIndex + 1} / {
+                images.filter(img => 
+                  img.title.trim().toLowerCase() === selectedImage.title.trim().toLowerCase()
+                ).length
+              }
             </div>
           </div>
         </div>

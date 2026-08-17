@@ -1,58 +1,38 @@
-/* About Page Styles */
+/* =========================================================
+   IFTECLABS - ABOUT PAGE STYLING
+   ========================================================= */
+
 .about {
   width: 100%;
-}
-
-/* Hero Section */
-.about-hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 100px 20px;
-  text-align: center;
-}
-
-.about-hero h1 {
-  font-size: 3rem;
-  margin-bottom: 15px;
-  font-weight: bold;
-}
-
-.about-hero p {
-  font-size: 1.3rem;
-  color: #ffd700;
-}
-
-/* Container */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  background: var(--background);
+  font-family: var(--font-sans);
 }
 
 /* Intro Section */
 .intro-section {
-  padding: 80px 20px;
-  background: white;
+  padding: 90px 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .intro-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  gap: 60px;
   align-items: center;
 }
 
 .intro-text h2 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 25px;
-  font-weight: bold;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  font-weight: 800;
 }
 
 .intro-text p {
   font-size: 1.05rem;
-  color: #666;
-  line-height: 1.8;
+  color: var(--text-secondary);
+  line-height: 1.7;
   margin-bottom: 20px;
 }
 
@@ -62,419 +42,254 @@
   align-items: center;
 }
 
+/* Image Placeholder / Visual Card */
 .image-placeholder {
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1;
+  background: radial-gradient(circle at 100% 0%, var(--primary-light) 0%, var(--primary-dark) 100%);
+  border-radius: var(--radius-lg);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #ffd700;
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-md);
+  padding: 40px;
+  text-align: center;
 }
 
-/* Mission & Vision */
+.image-placeholder svg {
+  color: var(--accent-light);
+  margin-bottom: 20px;
+}
+
+.image-placeholder h3 {
+  color: var(--text-light);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.image-placeholder p {
+  font-size: 0.95rem;
+  color: rgba(248, 250, 252, 0.7);
+  line-height: 1.5;
+}
+
+/* Mission & Vision Row */
 .mission-vision {
-  background: #f8f9fa;
-  padding: 80px 20px;
+  background: var(--background);
+  padding: 90px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
 
 .mission-card {
-  background: white;
-  padding: 40px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  background: var(--surface);
+  padding: 45px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mission-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
-}
-
-.card-icon {
-  color: #667eea;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(37, 99, 235, 0.2);
 }
 
 .mission-card h3 {
-  font-size: 1.8rem;
-  color: #333;
+  font-size: 1.5rem;
+  color: var(--text-primary);
   margin-bottom: 15px;
-  font-weight: bold;
+  font-weight: 800;
 }
 
 .mission-card p {
-  color: #666;
-  line-height: 1.8;
-  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-size: 0.98rem;
+  margin: 0;
 }
 
-/* Values Section */
+/* Values Grid */
 .values-section {
-  padding: 80px 20px;
-  background: white;
+  padding: 90px 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .values-section h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
   text-align: center;
-  color: #333;
-  margin-bottom: 15px;
-  font-weight: bold;
-}
-
-.section-subtitle {
-  text-align: center;
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 50px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-weight: 800;
 }
 
 .values-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
 }
 
 .value-card {
-  background: #f8f9fa;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  border: 2px solid #f0f0f0;
-  transition: all 0.3s ease;
+  background: var(--background);
+  padding: 35px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  text-align: left;
+  transition: all 0.25s ease;
 }
 
 .value-card:hover {
-  border-color: #667eea;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.1);
-  transform: translateY(-5px);
-}
-
-.value-icon {
-  color: #667eea;
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: center;
+  border-color: rgba(37, 99, 235, 0.18);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  background: var(--surface);
 }
 
 .value-card h3 {
-  font-size: 1.3rem;
-  color: #333;
+  font-size: 1.15rem;
+  color: var(--text-primary);
   margin-bottom: 12px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .value-card p {
-  color: #666;
-  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
   line-height: 1.6;
+  margin: 0;
 }
 
-/* Expertise Section */
+/* Expertise List (Technical capabilities) */
 .expertise-section {
-  padding: 80px 20px;
-  background: #f8f9fa;
+  padding: 90px 0;
+  background: var(--background);
 }
 
 .expertise-section h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
   text-align: center;
-  color: #333;
-  margin-bottom: 15px;
-  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+  font-weight: 800;
 }
 
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
-.expertise-item {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
+.expertise-card {
+  background: var(--surface);
+  padding: 35px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  text-align: left;
+  box-shadow: var(--shadow-sm);
   display: flex;
-  align-items: center;
-  gap: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  flex-direction: column;
 }
 
-.expertise-item:hover {
-  transform: translateX(8px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+.expertise-card h3 {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  font-weight: 700;
 }
 
-.expertise-icon {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  flex-shrink: 0;
+.expertise-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
-.expertise-item span {
-  color: #333;
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-/* Innovation Section */
-.innovation-section {
-  padding: 80px 20px;
-  background: white;
-}
-
-.innovation-section h2 {
-  font-size: 2.5rem;
-  text-align: center;
-  color: #333;
-  margin-bottom: 15px;
-  font-weight: bold;
-}
-
-.innovation-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  align-items: center;
-  margin-top: 50px;
-}
-
-.innovation-text p {
-  font-size: 1.05rem;
-  color: #666;
-  line-height: 1.8;
-  margin-bottom: 25px;
-}
-
-.innovation-list {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-.innovation-list li {
-  color: #667eea;
-  font-weight: 600;
-  padding-left: 25px;
-  position: relative;
-  font-size: 0.95rem;
-}
-
-.innovation-list li::before {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: #667eea;
-  font-size: 1.3rem;
-}
-
-.innovation-image {
-  display: flex;
-  justify-content: center;
-}
-
-/* Training Section */
+/* Timelines / Training Section */
 .training-section {
-  padding: 80px 20px;
-  background: #f8f9fa;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 90px 0;
 }
 
 .training-section h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
   text-align: center;
-  color: #333;
-  margin-bottom: 15px;
-  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+  font-weight: 800;
 }
 
 .training-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
-  margin-top: 50px;
 }
 
 .training-card {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  border-left: 4px solid #667eea;
-}
-
-.training-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+  text-align: left;
 }
 
 .training-card h3 {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 15px;
-  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 12px;
 }
 
 .training-card p {
-  color: #666;
-  line-height: 1.6;
+  color: var(--text-secondary);
   font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-/* CTA Section */
-.about-cta {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 80px 20px;
-  text-align: center;
-}
+/* =========================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================= */
 
-.about-cta h2 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-  font-weight: bold;
-}
-
-.about-cta p {
-  font-size: 1.1rem;
-  margin-bottom: 30px;
-  opacity: 0.95;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.btn-primary {
-  background: #ffd700;
-  color: #667eea;
-}
-
-.btn-primary:hover {
-  background: #ffed4e;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
-}
-
-.btn-large {
-  padding: 14px 40px;
-  font-size: 1.1rem;
-}
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .about-hero h1 {
-    font-size: 2rem;
+@media (max-width: 1024px) {
+  .values-grid,
+  .expertise-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
+@media (max-width: 900px) {
   .intro-content {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 40px;
   }
-
-  .intro-text h2 {
-    font-size: 1.8rem;
-  }
-
-  .mission-vision {
-    grid-template-columns: 1fr;
-  }
-
-  .innovation-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .innovation-list {
-    grid-template-columns: 1fr;
-  }
-
+  
+  .mission-vision,
   .training-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
-
-  .about-cta h2 {
-    font-size: 1.8rem;
+  
+  .image-placeholder {
+    max-width: 100%;
   }
 }
 
-@media screen and (max-width: 480px) {
-  .about-hero {
-    padding: 60px 20px;
+@media (max-width: 640px) {
+  .values-grid,
+  .expertise-grid {
+    grid-template-columns: 1fr;
   }
-
-  .about-hero h1 {
-    font-size: 1.5rem;
-  }
-
-  .intro-section,
-  .values-section,
-  .innovation-section,
-  .training-section {
-    padding: 50px 20px;
-  }
-
-  .intro-text h2,
-  .values-section h2,
-  .innovation-section h2,
-  .training-section h2 {
-    font-size: 1.5rem;
-  }
-
-  .section-subtitle {
-    font-size: 0.95rem;
-    margin-bottom: 30px;
-  }
-
-  .mission-card {
-    padding: 25px;
-  }
-
-  .image-placeholder {
-    width: 250px;
-    height: 250px;
-  }
-
-  .about-cta {
-    padding: 50px 20px;
-  }
-
-  .about-cta h2 {
-    font-size: 1.3rem;
-  }
-
-  .about-cta p {
-    font-size: 0.95rem;
+  
+  .mission-card,
+  .value-card,
+  .expertise-card,
+  .training-card {
+    padding: 30px;
   }
 }

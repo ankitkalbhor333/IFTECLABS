@@ -10,11 +10,11 @@ export default function Videos() {
   const videos = [
     {
       id: 1,
-      title: 'Electronics Assembly Process',
+      title: 'Dmd clock Iot',
       category: 'Electronics',
       description: 'Step-by-step PCB assembly and component soldering',
       thumbnail: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=225&fit=crop',
-      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      url: 'https://www.facebook.com/share/r/1BZNv6vaP2/',
       date: '2024-05-20'
     },
     {
