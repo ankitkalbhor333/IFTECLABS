@@ -193,4 +193,8 @@
     width: min(100% - 32px, 1200px);
     min-height: 64px;
   }
+
+  .navbar-logo-img {
+    height: 40px;
+  }
 }

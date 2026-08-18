@@ -247,6 +247,35 @@ p:last-child {
   padding: 110px 0 90px;
   border-bottom: 1px solid rgba(148, 163, 184, 0.12);
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.about-hero {
+  background-image: linear-gradient(to right, rgba(2, 6, 23, 0.85) 35%, rgba(2, 6, 23, 0.45) 100%), url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=80');
+}
+
+.projects-hero {
+  background-image: linear-gradient(to right, rgba(2, 6, 23, 0.85) 35%, rgba(2, 6, 23, 0.45) 100%), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&auto=format&fit=crop&q=80');
+}
+
+.gallery-hero {
+  background-image: linear-gradient(to right, rgba(2, 6, 23, 0.85) 35%, rgba(2, 6, 23, 0.45) 100%), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&auto=format&fit=crop&q=80');
+}
+
+.videos-hero {
+  background-image: linear-gradient(to right, rgba(2, 6, 23, 0.85) 35%, rgba(2, 6, 23, 0.45) 100%), url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&auto=format&fit=crop&q=80');
+}
+
+.enquiry-hero,
+.enquiry-success-hero {
+  background-image: linear-gradient(to right, rgba(2, 6, 23, 0.85) 35%, rgba(2, 6, 23, 0.45) 100%), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+.contact-hero {
+  background-image: linear-gradient(to right, rgba(2, 6, 23, 0.85) 35%, rgba(2, 6, 23, 0.45) 100%), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&auto=format&fit=crop&q=80');
 }
 
 .about-hero::before,

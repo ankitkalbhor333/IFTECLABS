@@ -7,6 +7,8 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
 
   const images = [
     { id: 1, src: 'https://res.cloudinary.com/dsoj9ctkk/image/upload/v1786971881/photo1_cblcxl.jpg', category: 'projects', title: 'pen plotter' },
@@ -76,6 +78,28 @@ export default function Gallery() {
     setSelectedImage(sameTitleImages[newIndex])
   }
 
+  // Swipe support for mobile devices
+  const onTouchStart = (e) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+    if (isLeftSwipe) {
+      nextImage()
+    } else if (isRightSwipe) {
+      prevImage()
+    }
+  }
+
   return (
     <div className="gallery">
       {/* Hero Section */}
@@ -131,7 +155,13 @@ export default function Gallery() {
 
       {/* Lightbox */}
       {selectedImage && (
-        <div className="lightbox" onClick={closeLightbox}>
+        <div 
+          className="lightbox" 
+          onClick={closeLightbox}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             <button className="lightbox-close" onClick={closeLightbox}>
               <FontAwesomeIcon icon={faXmark} />
