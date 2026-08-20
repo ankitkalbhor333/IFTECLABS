@@ -237,7 +237,7 @@ export default function Enquiry() {
       }
 
       const response = await axios.post(
-        `${API_BASE_URL}/enquiries`,
+        `${API_BASE_URL}/api/enquiries`,
         payload,
         {
           headers: {
