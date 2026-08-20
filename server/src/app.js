@@ -22,8 +22,12 @@ app.use(helmet());
 // Logging middleware
 app.use(morgan('dev'));
 
-// CORS configuration - allows any localhost port dynamically and the configured CLIENT_URL
+// CORS configuration - allows any localhost port dynamically and the configured CLIENT_URL(s)
 const clientUrl = process.env.CLIENT_URL;
+const allowedOrigins = clientUrl 
+  ? clientUrl.split(',').map(url => url.trim().replace(/\/$/, '')) 
+  : [];
+
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
@@ -33,7 +37,7 @@ app.use(cors({
                     origin === 'http://localhost' || 
                     origin === 'http://127.0.0.1' ||
                     origin === 'http://[::1]';
-    if (isLocal || origin === clientUrl) {
+    if (isLocal || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(null, false);
