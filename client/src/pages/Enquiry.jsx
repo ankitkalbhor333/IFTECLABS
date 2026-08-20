@@ -14,7 +14,8 @@ import {
 import axios from 'axios'
 import './Enquiry.css'
 
-const API_BASE_URL = 'http://localhost:5000/api'
+
+const API_BASE_URL = 'https://ifteclabs-um5q.onrender.com/api'
 
 export default function Enquiry() {
   const [formData, setFormData] = useState({
